@@ -13,23 +13,6 @@ lr = 1e-4 ; lr_backbone = 1e-5 ; weight_decay=1e-4
 gradient_clip_val = 0.1
 gpu=1
 
-'''
-# see https://github.com/facebookresearch/detr/issues/9#issuecomment-636391562
-model = torch.hub.load('facebookresearch/detr', 'detr_resnet50', pretrained=False, num_classes=num_classes)
-
-# Get pretrained weights
-checkpoint = torch.hub.load_state_dict_from_url(
-            url='https://dl.fbaipublicfiles.com/detr/detr-r50-e632da11.pth',
-            map_location='cpu',
-            check_hash=True)
-del checkpoint["model"]["class_embed.weight"]
-del checkpoint["model"]["class_embed.bias"]
-model.load_state_dict(checkpoint["model"], strict=False)
-
-# Save
-torch.save(checkpoint, 'detr-r50_no-class-head-checkpoint.pth')
-'''
-
 ### COCO dataset ###
 coco=COCO("content/content_train/trainJson.json")
 print("coco.getCatIds()",coco.getCatIds())
@@ -173,7 +156,24 @@ class Detr(pl.LightningModule):
 
 model = Detr(lr=lr, lr_backbone=lr_backbone, weight_decay=weight_decay)
 
-## Load checkpoint ##
+### Load checkpoint ###
+## First option: load latest checkpoint from Facebook AI GitHub repo ##
+# see https://github.com/facebookresearch/detr/issues/9#issuecomment-636391562
+model = torch.hub.load('facebookresearch/detr', 'detr_resnet50', pretrained=False, num_classes=num_classes)
+
+# Get pretrained weights
+checkpoint = torch.hub.load_state_dict_from_url(
+            url='https://dl.fbaipublicfiles.com/detr/detr-r50-e632da11.pth',
+            map_location='cpu',
+            check_hash=True)
+del checkpoint["model"]["class_embed.weight"]
+del checkpoint["model"]["class_embed.bias"]
+model.load_state_dict(checkpoint["model"], strict=False)
+
+# Save
+torch.save(checkpoint, 'detr-r50_no-class-head-checkpoint.pth')
+
+## Second option: load latest checkpoint (created after running main.py) ##
 checkpoint = torch.load('checkpoint6.pth')
 model.load_state_dict(checkpoint)
 
