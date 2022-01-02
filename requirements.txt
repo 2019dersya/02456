@@ -1,0 +1,43 @@
+#pip3 install -r requirements.txt
+
+#pip3 install numpy
+numpy
+
+#pip3 install requests
+requests
+
+#pip3 install Pillow
+Pillow
+
+#pip3 install matplotlib
+matplotlib
+
+#pip3 install ipywidgets
+ipywidgets
+
+# TORCH AND TORCHVISION: SPECIFIC VERSION REQUIRED
+#pip3 install torch
+#torch
+
+#pip3 install torchvision
+#torchvision
+
+#pip3 install torch==1.8.0 torchvision==0.9.0
+torch==1.8.0
+torchvision==0.9.0
+
+#pip3 install pycocotools
+pycocotools
+
+#pip3 install scikit-image
+# instead of skimage
+scikit-image
+
+#pip3 install transformers
+transformers
+
+#pip install pytorch_lightning
+pytorch_lightning
+
+#pip install timm
+timm
