@@ -165,8 +165,8 @@ for cl in avg_probs_labels.keys():
     avg_probs_labels[cl] /= max(1,count_labels[cl])
 
 # True counts in training or validation dataset #
-json_file="content/content_train/trainJson.json"
-#json_file="content/content_test/testJson.json"
+#json_file="content/content_train/trainJson.json"
+json_file="content/content_test/testJson.json"
 with open(json_file) as json_f:
     json_load = json.load(json_f)
     json_d = json.dumps(json_load)
