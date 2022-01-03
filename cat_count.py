@@ -142,9 +142,9 @@ checkpoint = torch.load('checkpoint6.pth')
 model.load_state_dict(checkpoint)
 
 # Forward pass on training or validation dataset items #
-for i_b, b in enumerate(train_dataloader):
-#for i_b, b in enumerate(val_dataloader):
-    print(i_b)
+#for i_b, b in enumerate(train_dataloader):
+for i_b, b in enumerate(val_dataloader):
+    #print(i_b)
     # get the inputs
     img_id = b["labels"][0]['image_id'].item()
     pixel_values = b["pixel_values"]
