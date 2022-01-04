@@ -5,6 +5,7 @@
 Contents of the folders:
 - annotated_validation_images: the first 10 frames from the validation dataset, annotated with the output predictions
 - figures: some of the figures displayed in our report
+- **minimal_example** : download the folder and run the Minimal_Example notebook
 - preprocessing: code to split frames, create augmented dataset, and correct file naming issues
 - results: counting the number of instances of each category, drawing annotations, plotting, visualising results
 - training_on_GPU: code files submitted to train the model
