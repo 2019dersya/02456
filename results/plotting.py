@@ -3,60 +3,6 @@ import matplotlib.pyplot as plt
 import csv
 import regex as re
 
-def plot_train(file_path="train_1.txt"):
-    nbsteps = 16602*2+154//2
-
-    with open(file_path, 'r') as f:
-        file_name=file_path
-        lines = f.readlines()
-
-    print(lines[58158])
-
-    steps = []; losses = []
-    for i in range(58159):
-        epoch = re.findall(r"Epoch (\d*):",lines[i])
-        step = re.findall(r"\|\s+(\d*)\/\d+",lines[i])
-        loss = re.findall(r"loss=([\w\.\-]*)",lines[i])
-        if epoch and step and loss:
-            steps.append(int(epoch[0])*16756+float(step[0]))
-            l = loss[0].split("e")
-            if len(l)==1:
-                l=float(l[0])
-            elif len(l)==2:
-                l=float(l[0])*10**float(l[1])
-            losses.append(l)
-
-    for i in range(58159, len(lines)):
-        epoch = re.findall(r"Epoch (\d*):",lines[i])
-        step = re.findall(r"\|\s+(\d*)\/\d+",lines[i])
-        loss = re.findall(r"loss=([\w\.\-]*)",lines[i])
-        if epoch and step and loss:
-            steps.append((int(epoch[0])+2)*16756+float(step[0]))
-            l = loss[0].split("e")
-            if len(l)==1:
-                l=float(l[0])
-            elif len(l)==2:
-                l=float(l[0])*10**float(l[1])
-            losses.append(l)
-
-    print("steps:", len(steps))
-    print("losses:",len(losses))
-
-    #plt.plot(range(0, len(losses)), losses, label="Training loss")
-    #plt.scatter(steps[0:len(steps)], losses[0:len(steps)], label="Training loss", s=2, alpha=0.6)
-    plt.scatter(range(0,len(steps)),losses[0:len(steps)], label="Training loss", s=2, alpha=0.6)
-    plt.plot([0, steps[-1]],[losses[-1],losses[-1]], c='green')
-    plt.annotate(str(losses[-1]),[0,losses[-1]+0.04],c='green')
-
-    if file_name=="train1.txt":
-        plt.title("GPU Training loss during 4 epochs, with 16602 training examples \nand 154 validation examples")
-    plt.xlabel("Steps")
-    plt.ylabel("Loss")
-    plt.legend()
-    plt.show()
-    return
-#plot_train("training_1.txt")
-
 def plot_train_gpu(file_path="training_loss_gpu.txt"):
     
     with open(file_path, 'r') as f:
@@ -197,4 +143,4 @@ def plot_train_val():
     plt.legend()
     plt.show()
     return
-plot_train_val()
+#plot_train_val()
