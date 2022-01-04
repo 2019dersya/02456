@@ -180,7 +180,7 @@ for i_b, b in enumerate(val_dataloader):
         # forward pass --> logits and boxes
         outputs = model.model(pixel_values=pixel_values, pixel_mask=pixel_mask)
         logits = outputs.logits[0]
-        softmax = nn.Softmax()
+        softmax = nn.Softmax(dim=-1)
         probs = softmax(logits)
 
         pred_boxes = outputs.pred_boxes[0]
