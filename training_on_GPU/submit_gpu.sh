@@ -38,6 +38,6 @@ echo  "Pip version used:"
 which pip3
 #pip3 install -r requirements.txt
 echo
-echo  "All packages installed, running draw_annot.py"
+echo  "All packages installed, running main.py"
 echo
-python3 draw_annot.py
+python3 main.py
